@@ -1,0 +1,82 @@
+$active-color: lime;
+$border-size: 5px;
+$dot-size: 20px;
+$duration: 2s;
+$inactive-color: #666;
+$radius: 50%;
+$spacing: 5px;
+
+
+%animation{
+    animation-duration: $duration;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+%radius{
+    border-radius: $radius;
+}
+
+%wave{    
+    border-color: $inactive-color;
+    border-bottom: $border-size solid transparent;
+    border-left: $border-size solid $inactive-color;
+    border-right: $border-size solid $inactive-color;
+    border-top: $border-size solid transparent;
+}
+
+.signal-wave{
+    @extend %animation;
+    @extend %radius;
+    @extend %wave;
+    animation-name: signalOuter;    
+    display: inline-block;
+    padding: $spacing;
+}
+
+.signal-wave-dot{      
+    @extend %animation;  
+    @extend %radius;
+    animation-name: signalDot;
+    background-color: $inactive-color; 
+    height: $dot-size;
+    width: $dot-size;
+}
+.signal-wave-inner{
+    @extend %animation;
+    @extend %radius;
+    @extend %wave;
+    animation-name: signalInner; 
+    padding: $spacing;
+}
+
+@keyframes signalDot{
+    0%{
+        background-color: $inactive-color;
+    }
+    25%{
+        background-color: $active-color;
+    }
+}
+
+@keyframes signalInner{
+    25%{
+        border-left-color: $inactive-color;
+        border-right-color: $inactive-color;
+    }
+    50%{
+        border-left-color: $active-color;
+        border-right-color: $active-color;
+    }
+} 
+
+@keyframes signalOuter{
+    50%{
+        border-left-color: $inactive-color;
+        border-right-color: $inactive-color;
+    }
+    75%{
+        border-left-color: $active-color;
+        border-right-color: $active-color;
+    }
+} 

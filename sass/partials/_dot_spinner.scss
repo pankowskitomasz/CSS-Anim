@@ -1,0 +1,44 @@
+$spinner-color: #999;
+$spinner-border-size: 5px;
+$spinner-dot-size: 10px;
+$spinner-duration: 1s;
+$spinner-pad-size: 5px;
+$spinner-size: $spinner-dot-size+(2 * $spinner-pad-size);
+
+@keyframes rotate360 {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.dot{    
+    .dot-in{
+        background-color:$spinner-color;
+        border-radius: $spinner-size/2;
+        display: inline-block;
+        height: $spinner-dot-size;
+        width: $spinner-dot-size;
+        margin: $spinner-pad-size;
+    }
+    animation:{
+        duration: $spinner-duration;
+        iteration-count: infinite;
+        name: rotate360;
+        timing-function: linear;
+    }
+    border:{
+        bottom-color: transparent; 
+        left-color: $spinner-color;
+        radius: $spinner-size; 
+        right-color: $spinner-color;
+        style: solid;
+        top-color: transparent;
+        width: $spinner-border-size;
+    }
+    display:inline-block;
+    height: $spinner-size;
+    margin: 0px;
+    width: $spinner-size;
+}

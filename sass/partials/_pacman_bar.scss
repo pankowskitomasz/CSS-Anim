@@ -1,0 +1,101 @@
+$eating-duration: 0.7s;
+$line-mid-width: 0%;
+$movedot-end: 85%;
+$movedot-start: 10%;
+$movement-duration: 6s;
+$pac-color: yellow;
+$pac-size: 40px;
+
+@mixin setupAnimation($nameA,$durationA,$timefA,$iterationA){
+    animation-name: $nameA;
+    animation-duration: $durationA;
+    animation-iteration-count: $iterationA;
+    animation-timing-function: $timefA;
+}
+
+@keyframes eating{
+    0%{            
+        left: 25px;
+        top: 0px;
+        border-right-width: 25px;
+    }
+    50%{            
+        left: 35px;
+        top: -10px;
+        border-right-width: 5px;
+    }
+    100%{            
+        left: 25px;
+        top: 0px;
+        border-right-width: 25px;
+    }
+}
+
+@keyframes line{
+    0%{
+        margin-left: $movedot-start;
+        width: $movedot-end; 
+    }
+    50%{
+        margin-left:$movedot-end;
+        width: $line-mid-width;
+    }
+    53%{
+        margin-left:$movedot-end;
+        width: $line-mid-width;
+    }
+    100%{        
+        margin-left: $movedot-start;
+        width: $movedot-end; 
+    }
+}
+
+@keyframes movedot{
+    0%{
+        margin-left: $movedot-start;
+        transform: rotate(45deg);
+    }
+    50%{
+        margin-left: $movedot-end;
+        transform: rotate(45deg);
+    }
+    51%{
+        margin-left: $movedot-end;
+        transform: rotate(225deg);
+    }
+    100%{            
+        margin-left: $movedot-start;
+        transform: rotate(225deg);
+    }
+}
+
+.dot-line{
+    @include setupAnimation(line,$movement-duration,linear,infinite);
+    border-top: 5px dotted white;
+    margin-left:15%;
+    opacity:0.6;
+    position: relative;
+    top: -22px;    
+    width:70%;    
+}
+
+.hungry-dot-top{
+    @include setupAnimation(movedot,$movement-duration,linear,infinite);
+    background-color: $pac-color;
+    border-radius:20px;
+    box-shadow: 0 0 3px $pac-color;
+    display: inline-block;
+    height: $pac-size;
+    transform: rotate(45deg);
+    width: $pac-size;       
+}
+
+.hungry-dot-top::after{
+    @include setupAnimation(eating,$eating-duration,linear,infinite);
+    background-color: #222;
+    border-right: 25px solid #222;
+    content: " ";    
+    left: 25px;
+    position:relative;
+    top: 0px;        
+}

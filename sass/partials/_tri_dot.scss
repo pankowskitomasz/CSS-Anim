@@ -1,0 +1,45 @@
+$dot-color: rgb(18, 153, 216);
+$dot-distance: 3px;
+$dot-num: 3;
+$dot-size: 20px;
+$duration: 1.5s;
+$opacity-end: 0.3;
+$opacity-start: 0.9;
+$transform-delay: $duration / $dot-num;
+
+@mixin setDots($objA,$dotsNumA,$paramA,$valA){
+    @for $i from 0 to $dotsNumA{
+        #{$objA}:nth-of-type(2n + #{$i+1}){
+            #{$paramA}: #{$valA * $i};
+        }
+    }
+}
+
+@keyframes triDot{
+    from{
+        opacity: $opacity-start;
+    }
+    to{
+        opacity: $opacity-end;
+    }
+}
+
+.tri-dot{ 
+    @include setDots(".dot-in",$dot-num,"animation-delay",$transform-delay);
+    .dot-in{
+        animation-name: triDot;
+        animation-duration: $duration;
+        animation-iteration-count: infinite;
+        animation-timing-function:linear;
+        background-color: $dot-color;
+        border-radius: $dot-size/2;
+        box-shadow: 0 0 2px $dot-color;
+        display: inline-block;
+        height: $dot-size;
+        margin: $dot-distance;
+        opacity: $opacity-end;
+        width: $dot-size;
+    }
+    background-color: transparent;
+    display: inline-block;
+}
